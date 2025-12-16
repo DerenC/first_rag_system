@@ -24,3 +24,24 @@ def get_vector_store():
         index_name=ATLAS_VECTOR_SEARCH_NAME)
 
     return vector_store
+
+def ingest_text(text_content):
+    vector_store = get_vector_store()
+    docs = Document(text_content)
+    vector_store.add_documents([docs])
+    return True
+
+def get_rag_response(query):
+    vector_store = get_vector_store()
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+    retriever = vector_store.as_retriever(search_type="similarity", search_kwargs={"k" : 3})
+
+    prompt_template = """
+Use the following context from the user in order to provide an accurate answer.
+"""
+
+    prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
+    qna_chain = RetrievalQA.from_chain_type(llm=llm, chain_stuff="stuff", retriever=retriever)
+
+    response = qna_chain.invoke({"query" : query})
+    return response
