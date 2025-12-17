@@ -1,3 +1,13 @@
 .ipynb_checkpoints
+
 .env
+.envrc
+.venv
+env/
+venv/
+env.bak/
+venv.bak/
+
 .streamlit/
+
+__pycache__/
