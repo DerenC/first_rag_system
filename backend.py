@@ -9,20 +9,25 @@ from langchain_core.documents import Document
 from langchain_core.output_parsers import StrOutputParser
 
 import streamlit as st
+import os
+
+if "GOOGLE_API_KEY" not in os.environ:
+    os.environ["GOOGLE_API_KEY"] = st.secrets["GEMINI_API_KEY"]
 
 MONGO_URI = st.secrets["MONGO_URI"]
+
 DB_NAME = "vector_store_database"
 COLLECTION_NAME = "vector_store_collection"
 ATLAS_VECTOR_SEARCH_NAME = "vector_index_ghw_aiml"
-USE_GEMINI_MODEL = True
-# USE_GEMINI_MODEL = False
+USE_GEMINI_EMBEDDING_MODEL = True
+# USE_GEMINI_EMBEDDING_MODEL = False
 
 def get_vector_store():
     client = MongoClient(MONGO_URI)
     collection = client[DB_NAME][COLLECTION_NAME]
 
     embeddings = GoogleGenerativeAIEmbeddings(
-        model="model/embeddings-001") if USE_GEMINI_MODEL \
+        model="model/embeddings-001") if USE_GEMINI_EMBEDDING_MODEL \
             else HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 
     vector_store = MongoDBAtlasVectorSearch(
