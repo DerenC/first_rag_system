@@ -1,9 +1,9 @@
 from pymongo import MongoClient
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_mongodb import MongoDBAtlasVectorSearch
-from langchain.prompts import PromptTemplate
-from langchain.chains import RetrievalQA
-from langchain.schema import Document
+from langchain_core.prompts import PromptTemplate
+from langchain_classic.chains.retrieval_qa.base import RetrievalQA
+from langchain_core.documents import Document
 import streamlit as st
 
 MONGO_URI = st.secrets["MONGO_URI"]
