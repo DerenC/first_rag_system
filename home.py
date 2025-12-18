@@ -1,6 +1,33 @@
 import streamlit as st
 import backend as rag
 
+def success_fade(message, seconds=3):
+    st.markdown(
+        f"""
+        <style>
+        @keyframes fadeOut {{
+            0% {{ opacity: 1; }}
+            80% {{ opacity: 1; }}
+            100% {{ opacity: 0; }}
+        }}
+
+        .fade-success {{
+            animation: fadeOut {seconds}s forwards;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }}
+        </style>
+
+        <div class="fade-success">
+            ✅ {message}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 st.title("My First RAG System")
 st.subheader("")
 st.divider()
@@ -9,13 +36,33 @@ with st.sidebar:
     st.header("Upload context")
     knowledge_text = st.text_area("Enter text of knowledge here", height=150)
 
-    if st.button("Upload to vector store"):
+    if st.button("Upload to vector store", key="upper-upload-button"):
         if knowledge_text:
             with st.spinner("Processing"):
                 rag.ingest_text(knowledge_text)
-                st.success("Uploaded")
+                success_fade("Uploaded")
         else:
             st.warning("There is no text. Please enter some text.")
+
+    uploaded_files = st.file_uploader(
+        "Choose files",
+        type=["pdf", "txt", "docx"],
+        accept_multiple_files=True,
+    )
+
+    if uploaded_files:
+        st.write(f"{len(uploaded_files)} file(s) uploaded")
+
+        for file in uploaded_files:
+            st.write("Filename:", file.name)
+            st.write("File type:", file.type)
+            st.write("File size (bytes):", file.size)
+
+        if st.button("Upload to vector store", key="lower-upload-button"):
+            for file in uploaded_files:
+                content = file.read().decode("utf-8")
+                # TODO
+            success_fade("Uploaded")
 
 st.header("Ask anything to the chat from our Knowledge Base")
 
