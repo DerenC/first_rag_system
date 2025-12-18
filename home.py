@@ -46,7 +46,8 @@ with st.sidebar:
 
     uploaded_files = st.file_uploader(
         "Choose files",
-        type=["pdf", "txt", "docx"],
+        type=["txt"],
+        # type=["pdf", "txt", "docx"],  #TODO
         accept_multiple_files=True,
     )
 
@@ -55,14 +56,15 @@ with st.sidebar:
 
         for file in uploaded_files:
             st.write("Filename:", file.name)
-            st.write("File type:", file.type)
-            st.write("File size (bytes):", file.size)
+            # st.write("File type:", file.type)
+            # st.write("File size (bytes):", file.size)
 
         if st.button("Upload to vector store", key="lower-upload-button"):
-            for file in uploaded_files:
-                content = file.read().decode("utf-8")
-                # TODO
-            success_fade("Uploaded")
+            with st.spinner("Processing"):
+                for file in uploaded_files:
+                    content = file.read().decode("utf-8")
+                    rag.ingest_text(content.strip())
+                success_fade("Uploaded")
 
 st.header("Ask anything to the chat from our Knowledge Base")
 
