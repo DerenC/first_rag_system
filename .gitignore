@@ -11,3 +11,5 @@ venv.bak/
 .streamlit/
 
 __pycache__/
+
+test_files/
