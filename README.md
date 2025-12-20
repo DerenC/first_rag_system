@@ -1,4 +1,4 @@
-# My First RAG System
+# Simple RAG System
 
 ## Features
 
