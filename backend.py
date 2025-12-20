@@ -45,6 +45,11 @@ def ingest_text(text_content):
     vector_store.add_documents([docs])
     return True
 
+def ingest_multiple_texts(text_list):
+    vector_store = get_vector_store()
+    docs = [Document(text) for text in text_list]
+    vector_store.add_documents(docs)
+
 def get_rag_response(query):
     vector_store = get_vector_store()
     llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")

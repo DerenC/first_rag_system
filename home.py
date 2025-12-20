@@ -62,9 +62,11 @@ with upload_tab:
 
         if st.button("Upload to vector store", key="lower-upload-button"):
             with st.spinner("Processing"):
+                texts = []
                 for file in uploaded_files:
-                    content = file.read().decode("utf-8")
-                    rag.ingest_text(content.strip())
+                    content = file.read().decode("utf-8").strip()
+                    texts.append(content)
+                rag.ingest_multiple_texts(texts)
                 success_fade("Uploaded")
 
 
