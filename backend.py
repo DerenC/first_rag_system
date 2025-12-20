@@ -43,7 +43,6 @@ def ingest_text(text_content):
     vector_store = get_vector_store()
     docs = Document(text_content)
     vector_store.add_documents([docs])
-    return True
 
 def ingest_multiple_texts(text_list):
     vector_store = get_vector_store()
