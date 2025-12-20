@@ -75,6 +75,9 @@ The core logic is contained in `backend.py`. You can import these functions into
 
 ## Future features to be implemented
 
+Frontend:
+* [ ] Bring back sidebar. Use it as navigation & page separators. 
+
 File uploading:
 * [ ] Supports uploading & parsing of pdf and docx files
 * [ ] Supports uploading & parsing of html files
