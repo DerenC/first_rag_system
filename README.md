@@ -73,7 +73,7 @@ The core logic is contained in `backend.py`. You can import these functions into
 * `ingest_text(text_content)`: Takes a string of text, creates a document, calculates its embedding, and stores it in MongoDB.
 * `get_rag_response(query)`: Performs a similarity search for the top 3 relevant documents in MongoDB and uses the Gemini LLM to answer the `query` based on that context.
 
-## Future features to be implemented
+## Future features to implement
 
 Frontend:
 * [ ] Bring back sidebar. Use it as navigation & page separators. 
