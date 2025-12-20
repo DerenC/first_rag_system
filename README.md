@@ -72,3 +72,20 @@ The core logic is contained in `backend.py`. You can import these functions into
 
 * `ingest_text(text_content)`: Takes a string of text, creates a document, calculates its embedding, and stores it in MongoDB.
 * `get_rag_response(query)`: Performs a similarity search for the top 3 relevant documents in MongoDB and uses the Gemini LLM to answer the `query` based on that context.
+
+## Future features to be implemented
+
+File uploading:
+* [ ] Supports uploading & parsing of pdf and docx files
+* [ ] Supports uploading & parsing of html files
+* [ ] Supports OCR of uploaded images
+* [ ] After OCR, connect to device camera
+
+Other sources of information:
+* [ ] Web crawling & web scraping of a user-specified URL
+* [ ] Implement a POST API endpoint to allow programmatical uploading
+
+Management of uploaded files & texts (vector store):
+* [ ] Keeping track of uploaded texts (might need to involve files' fingerprints), to prevent uploading of duplicated texts
+* [ ] Allow users to search the uploaded texts (cloud use Elasticsearch)
+* [ ] Allow users to specify which texts to delete from the vector store
