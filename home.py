@@ -47,7 +47,7 @@ with upload_tab:
 
     uploaded_files = st.file_uploader(
         "Choose files",
-        type=["txt"],
+        type=["txt", "md"],
         # type=["pdf", "txt", "docx"],  #TODO
         accept_multiple_files=True,
     )
