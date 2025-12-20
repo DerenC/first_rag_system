@@ -28,12 +28,13 @@ def success_fade(message, seconds=3):
         unsafe_allow_html=True,
     )
 
-st.title("My First RAG System")
-st.subheader("")
-st.divider()
+st.header("Simple RAG System")
 
-with st.sidebar:
-    st.header("Upload context")
+upload_tab, query_tab = st.tabs(["Upload Knowledge", "Ask Question"])
+
+with upload_tab:
+    st.header("Uploading information allows the RAG system to back its responses with sources")
+
     knowledge_text = st.text_area("Enter text of knowledge here", height=150)
 
     if st.button("Upload to vector store", key="upper-upload-button"):
@@ -66,30 +67,31 @@ with st.sidebar:
                     rag.ingest_text(content.strip())
                 success_fade("Uploaded")
 
-st.header("Ask anything to the chat from our Knowledge Base")
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+with query_tab:
+    st.header("Ask any question, the RAG system will give you evidence-based responses")
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
 
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
-prompt = st.chat_input("Ask anything you want to know")
-if prompt:
-    st.chat_message("user").markdown(prompt)
-    st.session_state.messages.append({"role": "user", "content": prompt})
+    prompt = st.chat_input("Ask anything you want to know")
+    if prompt:
+        st.chat_message("user").markdown(prompt)
+        st.session_state.messages.append({"role": "user", "content": prompt})
 
-    with st.chat_message("assistant"):
-        with st.spinner("IS THINKING"):
-            response_data = rag.get_rag_response(prompt)
-            answer = response_data["answer"]
-            sources = response_data["sources"]
+        with st.chat_message("assistant"):
+            with st.spinner("IS THINKING"):
+                response_data = rag.get_rag_response(prompt)
+                answer = response_data["answer"]
+                sources = response_data["sources"]
 
-            st.markdown(answer)
+                st.markdown(answer)
 
-            with st.expander("Sources"):
-                for i, source in enumerate(sources):
-                    st.markdown(f"**Source {i+1}:** {source.page_content}")
+                with st.expander("Sources"):
+                    for i, source in enumerate(sources):
+                        st.markdown(f"**Source {i+1}:** {source.page_content}")
 
-            st.session_state.messages.append({"role": "assistant", "content": answer})
+                st.session_state.messages.append({"role": "assistant", "content": answer})
