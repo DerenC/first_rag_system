@@ -55,10 +55,10 @@ with upload_tab:
     if uploaded_files:
         st.write(f"{len(uploaded_files)} file(s) uploaded")
 
-        for file in uploaded_files:
-            st.write("Filename:", file.name)
-            # st.write("File type:", file.type)
-            # st.write("File size (bytes):", file.size)
+        # for file in uploaded_files:
+        #     st.write("Filename:", file.name)
+        #     st.write("File type:", file.type)
+        #     st.write("File size (bytes):", file.size)
 
         if st.button("Upload to vector store", key="lower-upload-button"):
             with st.spinner("Processing"):
