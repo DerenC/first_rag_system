@@ -76,6 +76,7 @@ The core logic is contained in `backend.py`. You can import these functions into
 ## Future features to implement
 
 Frontend:
+* [ ] Disable the upload button when the uploading is being processed.
 * [ ] Bring back sidebar. Use it as navigation & page separators. 
 
 File uploading:
