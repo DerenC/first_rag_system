@@ -76,6 +76,7 @@ The core logic is contained in `backend.py`. You can import these functions into
 ## Future features to implement
 
 Frontend:
+* [ ] Sometimes the success toast does not appear for the 2nd time of clicking the "Upload to vector store" button onwards.
 * [ ] Disable the upload button when the uploading is being processed.
 * [ ] Bring back sidebar. Use it as navigation & page separators. 
 
