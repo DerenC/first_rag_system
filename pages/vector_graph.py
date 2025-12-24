@@ -17,7 +17,7 @@ if st.button("Plot") and query:
 
         # Query vector + All relevant knowledge vectors
         vectors = [data["query_vector"]] + [doc_data["vector"] for doc_data in data["docs_data"]]
-        labels = ["YOUR QUERY"] + [doc_data["full_text"][:50] + "..." for doc_data in data["docs_data"]]
+        labels = [query] + [doc_data["full_text"][:50] + "..." for doc_data in data["docs_data"]]
         types = ["Query"] + ["Result" for _ in data["docs_data"]]
 
         n_components = min(2, len(data["query_vector"]))
