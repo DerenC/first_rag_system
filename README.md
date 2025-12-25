@@ -86,6 +86,9 @@ File uploading:
 * [ ] Supports OCR of uploaded images
 * [ ] After OCR, connect to device camera
 
+Visualisation of vectors:
+* [ ] Add cosine similarity scores of each result with respect to the query
+
 Other sources of information:
 * [ ] Web crawling & web scraping of a user-specified URL
 * [ ] Implement a POST API endpoint to allow programmatical uploading
